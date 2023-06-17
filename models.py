@@ -8,12 +8,15 @@ class User(db.Model):
     organizations = db.relationship('Organization', secondary='user_organization', backref='users')
 
     def serialize(self):
-        return {
+        serialized_user = {
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email
         }
+        if self.organizations:
+            serialized_user['organizations'] = [organization.serialize() for organization in self.organizations]
+        return serialized_user
 
     def __repr__(self):
         return f'<User {self.first_name} {self.last_name}>'
@@ -30,6 +33,19 @@ class Organization(db.Model):
 
     def __repr__(self):
         return f'<Organization {self.name}>'
+    
+class CallCounter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    count = db.Column(db.Integer, default=0)
+
+    def increment(self):
+        self.count += 1
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'count': self.count
+        }  
 
 user_organization = db.Table('user_organization',
                               db.Column('user_id', db.Integer, db.ForeignKey('user.id')),

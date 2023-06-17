@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 
 from routes.user_routes import user_routes
 from routes.organization_routes import organization_routes
+from utils.scheduler import scheduler
 
 app.register_blueprint(user_routes)
 app.register_blueprint(organization_routes)

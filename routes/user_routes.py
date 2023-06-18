@@ -6,6 +6,9 @@ user_routes = Blueprint('user_routes', __name__)
 
 @user_routes.before_app_request
 def create_counter():
+    """
+    Creates the call counter entry with value 0 if it doesn't exist
+    """
     counter = CallCounter.query.first()
     if not counter:
         counter = CallCounter(count=0)
@@ -14,12 +17,29 @@ def create_counter():
 
 @user_routes.before_request
 def increment_counter():
+    """
+    Increments the call counter entry by 1 whenever any organization endpoint is called
+    """
     counter = CallCounter.query.first()
     counter.count += 1
     db.session.commit()
 
 @user_routes.route('/user', methods=['GET'])
 def search_users():
+    """
+    Gets a list of users with optional filtering.
+
+    Query parameters:
+    - page: Page number (default: 1)
+    - per_page: Number of users per page (default: 10)
+    - first_name: Filter by first name 
+    - last_name: Filter by last name
+    - email: Filter by email 
+    - organization_id: Filter by organization ID
+
+    Returns:
+        JSON containing the list of users with the matching criteria.
+    """
     page = request.args.get('page', default=1, type=int)
     per_page = request.args.get('per_page', default=10, type=int)
     first_name = request.args.get('first_name', default=None, type=str)
@@ -51,6 +71,19 @@ def search_users():
 
 @user_routes.route('/user', methods=['POST'])
 def create_user():
+    """
+    Create a new user.
+
+    Request body:
+    {
+        "first_name": string,
+        "last_name": string,
+        "email": string
+    }
+
+    Returns:
+        Response indicating the success or failure of the operation.
+    """
 
     data = request.json
 
@@ -78,7 +111,18 @@ def create_user():
 
 @user_routes.route('/user/assign_organization', methods=['POST'])
 def assign_organization():
-    
+    """
+    Assigns a user to an organization.
+
+    Request body:
+    {
+        "user_id": int,
+        "organization_id": int
+    }
+
+    Returns:
+        Response indicating the success or failure of the operation.
+    """
     data = request.json
 
     user_id = data.get('user_id')

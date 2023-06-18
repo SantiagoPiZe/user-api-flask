@@ -6,6 +6,9 @@ organization_routes = Blueprint('organization_routes', __name__)
 
 @organization_routes.before_app_request
 def create_counter():
+    """
+    Creates the call counter entry with value 0 if it doesn't exist
+    """
     counter = CallCounter.query.first()
     if not counter:
         counter = CallCounter(count=0)
@@ -14,12 +17,21 @@ def create_counter():
 
 @organization_routes.before_request
 def increment_counter():
+    """
+    Increments the call counter entry by 1 whenever any organization endpoint is called
+    """
     counter = CallCounter.query.first()
     counter.count += 1
     db.session.commit()
 
 @organization_routes.route('/organization', methods=['GET'])
 def search_organizations():
+    """
+    Retrieve all organizations.
+
+    Returns:
+        JSON containing the list of organizations.
+    """
 
     organizations = Organization.query.all()
 
@@ -31,6 +43,12 @@ def search_organizations():
 
 @organization_routes.route('/organization', methods=['POST'])
 def create_organization():
+    """
+    Creates a new organization.
+
+    Returns:
+        Response indicating the success or failure of the operation.
+    """
 
     data = request.json
 

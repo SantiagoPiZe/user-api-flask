@@ -1,20 +1,20 @@
-#Flask User Management API
+# Flask User Management API
 
 This is a Python API built with Flask that provides user management functionalities using a MySQL database. It allows you to perform user search, user and organization creation, user assignation to organizations, organization retrieval, and retrieve a call counter value.
 Prerequisites
 
-####Make sure you have the following software installed on your system:
+#### Make sure you have the following software installed on your system:
 
     Python
     MySQL
 
-##Installation
+## Installation
 
-####Clone the repository:
+#### Clone the repository:
 
     git clone https://github.com/SantiagoPiZe/user-api-flask.git
     
-####Setup the database:
+#### Setup the database:
 
 Create a new mysql database for the project with the name of your choice. Then inside the project files, locate the .env file and modify:
   
@@ -22,7 +22,7 @@ Create a new mysql database for the project with the name of your choice. Then i
   DB_PASSWORD: your mysql password
   DB_NAME: the chosen name for the database
 
-####Inside the project folder, run the following commands:
+#### Inside the project folder, run the following commands:
 
     - venv/bin/activate
     Activate the virtual enviroment to ensure that the packages are installed within the virtual environment, making them available when you run the project.
@@ -36,11 +36,11 @@ Create a new mysql database for the project with the name of your choice. Then i
     -flask run
     This will start the application in localhost:5000
 
-##API Usage
+## API Usage
 
-  ###User Endpoints
+  ### User Endpoints
 
-   ####Search Users
+   #### Search Users
         Method: GET
         Endpoint: /user
         Description: Retrieves a list of users based on specified filters.
@@ -54,7 +54,7 @@ Create a new mysql database for the project with the name of your choice. Then i
         Response:
             Body: JSON object containing the list of users matching the filters, total amount of user, current page, and per page amount.
 
-   ####Create User
+   #### Create User
         Method: POST
         Endpoint: /user
         Description: Creates a new user.
@@ -66,7 +66,7 @@ Create a new mysql database for the project with the name of your choice. Then i
         Response:
             Body: JSON object containing a success message and the created user data.
 
-   ####Assign Organization to User
+   #### Assign Organization to User
         Method: POST
         Endpoint: /user/assign_organization
         Description: Assigns a user to an organization.
@@ -77,16 +77,16 @@ Create a new mysql database for the project with the name of your choice. Then i
         Response:
             Body: JSON object containing a success message.
 
-###Organization Endpoints
+### Organization Endpoints
 
-   ####Search Organizations
+   #### Search Organizations
         Method: GET
         Endpoint: /organization
         Description: Retrieves a list of organizations.
         Response:
             Body: JSON object containing the list of all the  organizations.
 
-   ####Create Organization
+   #### Create Organization
         Method: POST
         Endpoint: /organization
         Description: Creates a new organization.
@@ -96,9 +96,9 @@ Create a new mysql database for the project with the name of your choice. Then i
         Response:
             Body: JSON object containing a success message
 
-###Call Counter Endpoints
+### Call Counter Endpoints
 
-   ####Get Call Counter
+   #### Get Call Counter
         Method: GET
         Endpoint: /call_counter
         Description: Retrieves the value of the call counter.

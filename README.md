@@ -107,4 +107,4 @@ Create a new mysql database for the project with the name of your choice. Then i
 
 Additional Notes
 
-    The API automatically increments a call counter every 5 minutes and logs the value to the console.
+The API automatically increments a call counter every 5 minutes and logs the value to the console.

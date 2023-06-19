@@ -17,10 +17,13 @@ Prerequisites
 #### Setup the database:
 
 Create a new mysql database for the project with the name of your choice. Then inside the project files, locate the .env file and modify:
-  
-  DB_USERNAME: your mysql username
-  DB_PASSWORD: your mysql password
-  DB_NAME: the chosen name for the database
+
+    DB_USERNAME: your mysql username
+    
+    DB_PASSWORD: your mysql password
+    
+    DB_NAME: the chosen name for the database
+    
 
 #### Inside the project folder, run the following commands:
 
